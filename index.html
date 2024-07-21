@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="lay">
-       <p> Quick Response (QR) Code Generator</p>
+    <div class="container">
+        <p>Enter your text or URL</p>
+        <input type="text" placeholder="Text or URL" id="qrT">
+
+        <div id="imgBox">
+            <img src="" id="qrI">
+        </div>
+        <button onclick="generateQR()">Generate QR</button>
     </div>
-    
-    <div class="outer">
-        <p>Please Enter your Text or URL</p>
-       <input type="text" placeholder="Text / URL" id = "txt" >
-       <button id="clear" onclick="CLR()">Clear</button>
-       <div class="imgBox" id = "imgBox">
-           <img src="" id="image">
+
+    <!-- <footer>
+       <div class="fot">
+        <p>Happy to Help you ❤️</p>
        </div>
-       <button onclick="imgLoc()">Generate QR Code</button>
-    </div>
-    <div class="lay2">
-        <p> Instant Access: Scan the QR Code 😁.</p>
-     </div>
-    
+    </footer> -->
+
     <script>
-        
-        function imgLoc(){
-            var loc = document.getElementById("txt");
-            if(loc.value.length>0){
-                var IMG = document.getElementById("image");
-            IMG.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + loc.value;
-            document.getElementById("imgBox").classList.add("imgAfter");   
-            } 
+
+        let imgBox = document.getElementById("imgBox");
+        let qrI = document.getElementById("qrI");
+        let qrT = document.getElementById("qrT");
+
+        function generateQR() {
+            if (qrT.value.length > 0) {
+                qrI.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrT.value;
+                imgBox.classList.add("show-img")
+            }
+            else{
+                qrT.classList.add('error');
+                setTimeout(()=>{
+                    qrT.classList.remove('error');
+                },1000);
+            }
         }
-        function CLR(){
-            var loc = document.getElementById("txt");
-            loc.value = "";
-            document.getElementById("imgBox").classList.remove("imgAfter");   
-        }
-        
     </script>
-     
+
 </body>
+
 </html>
